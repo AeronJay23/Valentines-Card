@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Valentine's Card</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
+    
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            font-family: "Poppins", sans-serif;
+        }
+        @font-face {
+        font-family: tangerineFonts;
+        src: url(Fonts/Tangerine-Bold.ttf);
+        }
+        @font-face {
+            font-family: tangerineLightFonts;
+            src: url(Fonts/Tangerine-Regular.ttf);
+        }
+        body {
+            height: 100vh;
+            background: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: linear-gradient(to bottom, #feada6 0%, #f5efef 100%);
+        }
+        .card {
+            width: 640px;
+            height: 400px;
+            position: relative;
+            perspective: 1200px;
+            cursor: pointer;
+        }
+        .outside, .inside {
+            border: 1px solid black;
+            height: 100%;
+            width: 50%;
+            position: absolute;
+            left: 50%;
+            transition: transform 1s ease-in-out;
+        }
+        .inside {
+            background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+            line-height: 3;
+            padding: 0 20px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; 
+            align-items: center;
+            position: relative; 
+        }
+
+        .outside {
+            transform-style: preserve-3d;
+            transform-origin: left;
+            z-index: 1;
+        }
+        .front, .back {
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+        }
+        .front {
+            background: linear-gradient(to bottom, #600018 10%, #af0505 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+        .back {
+            transform: rotateY(180deg);
+            background: linear-gradient(to bottom, #600018 10%, #af0505 100%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .tenor-gif-embed {
+            width: 80%;
+            max-height: 200px;
+        }
+        .card.open .outside {
+            transform: rotateY(-130deg);
+        }
+        .inside img {
+            position: absolute;
+            max-width: 60%;
+            max-height: 30%;
+            object-fit: contain;
+            bottom: 10px;
+            right: 0;
+        }
+        .back img {
+            position: absolute;
+            max-width: 40%;
+            max-height: 26%;
+            object-fit: contain;
+            bottom: 10px;
+            left: 0;
+        }
+        .front {
+            display: flex;
+            flex-direction: column; 
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            gap: 0px; 
+        }
+
+        .heart-container {
+            display: flex;
+            gap: 20px;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            padding-top: 60px;
+        }
+
+        .text-container {
+            text-align: center;
+            margin-top: 10px; 
+        }
+
+        .redHeart, .whiteHeart {
+            position: absolute;
+        }
+
+        /*My Love Heart */
+        .whiteHeart {
+            position: relative;
+            height: 120px;
+            width: 80px;
+            background:rgb(255, 255, 255);
+            border-radius: 80px 80px 0 0;
+            transform: rotate(20deg); 
+            order: 1;
+            top: -60px;
+            right: 84px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);
+            
+        }
+        .whiteHeart::before{
+            content: "";
+            position: absolute;
+            background: rgb(255, 255, 255);
+            height: 120px;
+            width: 80px;
+            transform: rotate(-90deg);
+            border-radius: 200px 200px 0 0;
+            left: -20px;
+            top: 20px;
+        }
+        /*My Heart */
+        .redHeart {
+            position: relative;
+            height: 120px;
+            width: 80px;
+            background:rgb(213, 0, 0);
+            border-radius: 100px 100px 0 0;
+            transform: rotate(70deg); 
+            left: 110px;
+            top: -20px;
+            box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.4);    
+        }
+        .redHeart::before{
+            content: "";
+            position: absolute;
+            background: rgb(213, 0, 0);
+            height: 120px;
+            width: 80px;
+            transform: rotate(-90deg);
+            border-radius: 100px 100px 0 0;
+            left: -20px;
+            top: 20px;
+        }
+        .hug-btn {
+            background: white;
+            color: white;
+            font-size: 24px;
+            padding: 8px 20px;
+            box-shadow: 1px 1px #000000;
+            border-radius: 10px; 
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease-in-out;
+            text-decoration: none;
+        }
+
+        .hug-btn:hover {
+            background-image: linear-gradient(120deg, #f5576c 0%, #fb93ca 100%);
+            transform: scale(1.1);
+        }
+        .hug-container {
+            position: absolute;
+            top: 80px; 
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+        }
+      
+
+    
+    </style>
+</head>
+<body>
+
+    <div class="card" id="card">
+        <div class="outside">
+            <div class="front">
+                
+                <div class="heart-container">
+                    <div class="redHeart"></div>
+                    <div class="whiteHeart"></div>
+                </div>
+
+                <div class="text-container">
+                    <h4 style="font-family: tangerineFonts; font-size: 50px;">Happy</h4>
+                    <h1 style="font-family: tangerineFonts; font-size: 50px;">Valentines!!!</h1>
+                    <!-- <h4 style="font-family: tangerineFonts; font-size: 50px;">Day!!!</h4> -->
+                </div>
+                
+            </div>
+            <div class="back">
+                <div class="hug-container">
+                    <h4 style="font-family: tangerineFonts; font-size: 36px; color: white;">Click the button here for a hug</h4>
+                </div>
+
+                <div class="buttons">  
+                    <a href="Hug.html" class="button hug-btn">&#129392;</a>
+
+                </div>
+              
+                <img src="img/61IG5bR4eqL-removebg-preview.png" alt="whiteBear" />
+            </div>
+        </div>
+        <div class="inside">
+            <p style="font-size: 19px; font-family: tangerineFonts; line-height: 1.5; text-align: left;  text-indent: 30px; padding-top: 20px;">
+                Sorry medyo late ko na naibigay...
+                Uhmm... Di ko alam sasabihin ko, paano ba to? hahahaa...
+                Pero un masaya ako dahil naging part ka ng buhay ko,
+                masaya ako dahil nakakausap kita, minsan nakakasama, tsaka tau na,
+                though di pa tau legal, sa mga parents natin.
+          </p>
+            <p  style="font-size: 19px; font-family: tangerineFonts; line-height: 1.5; text-align: left;  text-indent: 30px;"> 
+                Sana masaya ka rin... Sana magtagal ung relationship natin, I mean sana habang buhay nalang...
+                Pero un, sana di ka magsawa sa akin... <br>
+            </p>
+
+            <div class="LastParagraph" style="left: 0;">
+                <h6 style="font-size: 19px; font-family: tangerineFonts; line-height: 1.5; text-align: center; padding-right: 80px; padding-top: 25px;">Happy Valentines Day, ulit... <br>Love You Always!!!<br>
+                    ❤️❤️❤️</h6>
+            </div>
+            
+            
+            <img src="img/red-teddy-bear-isolated-on-transparent-background-free-png.webp" alt="redBear" /> 
+        </div>
+    </div>
+
+    <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <script>
+        document.getElementById("card").addEventListener("click", function() {
+            this.classList.toggle("open");
+        });
+    </script>
+
+</body>
+</html>
